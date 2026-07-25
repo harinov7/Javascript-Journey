@@ -16,13 +16,13 @@ document.getElementById("mySubmit").onclick = function () {
         lembarHasilSiswa = `Nama tidak boleh dikosongkan`
     }
     else if (tugas < 0 || tugas > 100 || Number.isNaN(tugas)) {
-        lembarHasilSiswa = `Nilai tidak valid\nMasukkan angka 0 - 100 1`
+        lembarHasilSiswa = `Nilai tidak valid\nMasukkan angka 0 - 100`
     }
     else if (UTS < 0 || UTS > 100 || Number.isNaN(UTS)) {
-        lembarHasilSiswa = `Nilai tidak valid\nMasukkan angka 0 - 100 2`
+        lembarHasilSiswa = `Nilai tidak valid\nMasukkan angka 0 - 100`
     }
     else if (UAS < 0 || UAS > 100 || Number.isNaN(UAS)) {
-        lembarHasilSiswa = `Nilai tidak valid\nMasukkan angka 0 - 100 3`
+        lembarHasilSiswa = `Nilai tidak valid\nMasukkan angka 0 - 100`
     }
     else {
         let nilaiAkhirTugas = (20 * tugas / 100);
@@ -57,9 +57,6 @@ document.getElementById("mySubmit").onclick = function () {
             status = "TIDAK LULUS"
         }
 
-        console.log(tugas)
-        console.log(UTS)
-        console.log(UAS)
         lembarHasilSiswa = `===== HASIL PENILAIAN =====\nNama : ${namaSiswa.value}\nNilai Akhir : ${nilaiAkhirKeseluruhan.toFixed(2)}\n\nPredikat : ${predikatSiswa}\nStatus : ${status}`
 
     }
