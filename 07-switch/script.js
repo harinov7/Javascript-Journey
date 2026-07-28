@@ -6,7 +6,7 @@ document.getElementById("mySubmit").onclick = function () {
     let kosongan = ""
     let errorMessage = document.getElementById("errorMessage");
     let struk = document.getElementById("struk");
-    
+
     errorMessage.textContent = kosongan
     struk.textContent = kosongan
 
