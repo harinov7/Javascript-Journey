@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Function Journey</title>
+</head>
+<body>
+    <h2 id="judul">Register</h2>
+
+    <div id="kolomRegister">
+    <label>Nama: </label>
+    <input id="userName">
+
+    <br> <br>
+
+    <label>PIN: </label>
+    <input id="pin" type="password"> <br> <br>
+    </div>
+
+    <div id="kolomPilihanMenu" style="display: none;"><h3>Pilihan Menu: </h3>
+    <input id="cekSaldoRadio" type="radio" name="menu" value="1">
+    <label>Cek Saldo</label> <br> <br>
+
+    <input id="storTunaiRadio" type="radio" name="menu" value="2">
+    <label>Stor Tunai</label> <br> <br>
+
+    <input id="tarikTunaiRadio" type="radio" name="menu" value="3">
+    <label>Tarik Tunai</label> <br> <br>
+    </div>
+
+    <div id="kolomLanjutTransaksi" style="display: none;">
+        <input id="lanjutTransaksiRadio" type= "radio" name="pilihanLanjutAtauTidak" value="1">
+        <label>Lanjut Transaksi</label>
+
+        <br> <br>
+
+        <input id="selesaiTransaksiRadio" type= "radio" name="pilihanLanjutAtauTidak" value="2">
+        <label>Selesai</label>
+        <br> <br>
+    </div>
+
+    <div id="kolomStor" style="display: none;">
+        <label>Nominal: </label>
+        <input id="inputStor">
+        <br> <br>
+    </div>
+
+    <div id="kolomTarik" style="display: none;">
+        <label>Nominal: </label>
+        <input id="inputTarik">
+        <br> <br>
+    </div>
+
+    <button id="myKonfirmasi">Konfirmasi</button>
+
+    <pre id="struk"></pre>
+
+    <script src="script.js"></script>
+</body>
+</html>
