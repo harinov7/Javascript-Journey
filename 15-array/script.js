@@ -16,7 +16,7 @@ const hanyaHuruf = /^[A-Za-z ]+$/;
 let status = "login";
 let nilaiParaSiswa = [];
 let jumlahSiswa;
-let percobaanMasukkanNilai = 0
+let nilaiSudahDiinput = 0
 
 function bukaKolomTerpilih(kolomTerpilih) {
     kolomLogin.style.display = "none"
@@ -32,11 +32,11 @@ konfirmasiBtn.onclick = function () {
         else if (!hanyaHuruf.test(inputNamaGuru.value)) {
             lembarHasil.textContent = `Nama tidak valid`
         }
-        else if (Number(inputJumlahSiswa.value) <= 0) {
-            lembarHasil.textContent = `Jumlah siswa tidak valid`
-        }
         else if (isNaN(inputJumlahSiswa.value)) {
             lembarHasil.textContent = `Jumlah siswa harus berupa angka`
+        }
+        else if (Number(inputJumlahSiswa.value) <= 0) {
+            lembarHasil.textContent = `Jumlah siswa tidak valid`
         }
         else {
             status = `pendataanNilai`
@@ -57,14 +57,14 @@ konfirmasiBtn.onclick = function () {
         inputJumlahSiswa.value = ``
         lembarHasil.textContent = ``
         konfirmasiBtn.textContent = `Konfirmasi`
-        percobaanMasukkanNilai = 0
+        nilaiSudahDiinput = 0
         nilaiParaSiswa = []
         console.log(nilaiParaSiswa)
     }
 }
 
 tambahNilaiBtn.onclick = function () {
-    if (percobaanMasukkanNilai == jumlahSiswa) {
+    if (nilaiSudahDiinput == jumlahSiswa) {
         lembarHasil.textContent = `Semua siswa sudah mendapatkan nilai`
     }
     else if (isNaN(inputNilaiSiswa.value)) {
@@ -75,17 +75,17 @@ tambahNilaiBtn.onclick = function () {
     }
     else {
         nilaiParaSiswa.push(Number(inputNilaiSiswa.value))
-        percobaanMasukkanNilai++
+        nilaiSudahDiinput++
         inputNilaiSiswa.value = ``
         console.log(jumlahSiswa)
-        console.log(percobaanMasukkanNilai)
+        console.log(nilaiSudahDiinput)
         console.log(nilaiParaSiswa)
     }
 }
 
 prosesBtn.onclick = function () {
-    if (percobaanMasukkanNilai < jumlahSiswa) {
-        lembarHasil.textContent = `${jumlahSiswa - percobaanMasukkanNilai} siswa lain belum terisi nilai`
+    if (nilaiSudahDiinput < jumlahSiswa) {
+        lembarHasil.textContent = `${jumlahSiswa - nilaiSudahDiinput} siswa lain belum terisi nilai`
     }
     else {
         let nilaiTertinggi = 0
@@ -109,11 +109,11 @@ prosesBtn.onclick = function () {
         }
         let nilaiRataRata = nilaiTotal / jumlahSiswa
         let siswaTidakLulus = jumlahSiswa - siswaLulus
-        let predikat = nilaiRataRata >= 90 ? "Outstanding" : 
-        nilaiRataRata >= 80 ? "Excellent" : 
-        nilaiRataRata >= 70 ? "Good" : 
-        nilaiRataRata >= 60 ? "Fair" : 
-        "Poor"
+        let predikat = nilaiRataRata >= 90 ? "Outstanding" :
+            nilaiRataRata >= 80 ? "Excellent" :
+                nilaiRataRata >= 70 ? "Good" :
+                    nilaiRataRata >= 60 ? "Fair" :
+                        "Poor"
 
         konfirmasiBtn.style.display = `inline`
         tambahNilaiBtn.style.display = `none`
