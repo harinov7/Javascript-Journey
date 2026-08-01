@@ -37,11 +37,15 @@ function kosongkanInputText() {
     inputNama.value = ""
     inputPin.value = ""
 }
+function kosongkanNominal() {
+    inputStor.value = ""
+    inputTarik.value = ""
+}
 function kosongkanStruk() {
     outputStruk.textContent = ""
 }
 function mataUangIDR(nominal) {
-    nominal.toLocaleString("id-ID", { style: `currency`, currency: `IDR` })
+    return nominal.toLocaleString("id-ID", { style: `currency`, currency: `IDR` })
 }
 function bukaKolomTerpilih(kolomTerpilih) {
     kolomRegister.style.display = "none"
@@ -61,6 +65,7 @@ function bagianLanjutTransaksi() {
         gantiJudul("Menu")
         kosongkanInputRadio()
         kosongkanStruk()
+        kosongkanNominal()
         console.log(status)
         return;
     }
@@ -71,6 +76,7 @@ function bagianLanjutTransaksi() {
         kosongkanInputRadio()
         kosongkanInputText()
         kosongkanStruk()
+        kosongkanNominal()
         console.log(status)
         return;
     }
@@ -108,7 +114,7 @@ document.getElementById("myKonfirmasi").onclick = function () {
             gantiJudul("Cek Saldo")
             outputStruk.textContent = `
 Nama: ${inputNama.value}
-Saldo: ${saldo}
+Saldo: ${mataUangIDR(saldo)}
             `
             console.log(status)
             return;
@@ -119,6 +125,15 @@ Saldo: ${saldo}
             gantiJudul("Stor Tunai")
             kosongkanStruk()
             console.log(status)
+            return;
+        }
+        else if (tarikTunaiRadio.checked) {
+            status = "tarikTunai"
+            bukaKolomTerpilih(kolomTarik)
+            gantiJudul("Tarik Tunai")
+            kosongkanStruk()
+            console.log(status)
+            return;
         }
     }
 
@@ -130,19 +145,48 @@ Saldo: ${saldo}
         if (isNaN(inputStor.value)) {
             outputStruk.textContent = `Nominal harus berupa angka`
         }
+        else if (Number(inputStor.value) <= 0) {
+            outputStruk.textContent = `Nominal tidak valid`
+        }
         else {
-            let nominalStor = 0
-            nominalStor = Number(inputStor.value)
+            let nominalStor = Number(inputStor.value)
             saldo = saldo + nominalStor
             outputStruk.textContent = `
-Nominal stor: ${nominalStor}
-Saldo akhir: ${saldo}
+Nominal stor: ${mataUangIDR(nominalStor)}
+Saldo akhir: ${mataUangIDR(saldo)}
 `
             bukaKolomTerpilih(kolomLanjutTransaksi)
-            bagianLanjutTransaksi()
+            status = "lanjutTransaksi"
             return;
         }
     }
-}
 
-// masih di menu dan ceksaldo dan register
+    else if (status == "tarikTunai") {
+        if (isNaN(inputTarik.value)) {
+            outputStruk.textContent = `Nominal harus berupa angka`
+        }
+        else if (Number(inputTarik.value) <= 0) {
+            outputStruk.textContent = `Nominal tidak valid`
+        }
+        else if (Number(inputTarik.value) > saldo) {
+            outputStruk.textContent = `
+saldo tidak mencukupi
+Saldo: ${mataUangIDR(saldo)}`
+        }
+        else {
+            let nominalTarik = Number(inputTarik.value)
+            saldo = saldo - nominalTarik
+            outputStruk.textContent = `
+Nominal tarik: ${mataUangIDR(nominalTarik)}
+Saldo akhir: ${mataUangIDR(saldo)}
+`
+            bukaKolomTerpilih(kolomLanjutTransaksi)
+            status = "lanjutTransaksi"
+            return;
+        }
+    }
+
+    else if (status == "lanjutTransaksi") {
+        bagianLanjutTransaksi()
+    }
+}
