@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My For Each Journey</title>
+</head>
+
+<body>
+
+    <div id="halamanSatu">
+        <label>Nama Kasir: </label>
+        <input id="namaKasirInput">
+        
+        <br> <br>
+    </div>
+
+    <div id="halamanDua" style="display: none;">
+        <label>Jumlah Barang: </label>
+        <input id="jumlahBarangInput" type="number">
+
+        <br> <br>
+    </div>
+
+    <div id="halamanTiga" style="display: none;">
+        <label id="dataBarangLabel">DATA BARANG 1</label>
+        <br> <br>
+        <Label>Nama Barang: </Label>
+        <input id="namaBarangInput">
+        <br> <br>
+        <Label>Harga Barang: </Label>
+        <input id="hargaBarangInput" type="number">
+
+        <br> <br>
+    </div>
+
+    <div id="halamanLaporan" style="display: none;">
+        <pre id="outputLaporan"></pre>
+    </div>
+
+    <button id="konfirmasiBtn">Konfirmasi</button>
+    <button id="prosesBtn" style="display: none;">Proses</button>
+    <button id="selesaiBtn" style="display: none;">Selesai</button>
+
+    <pre id="pesanError"></pre>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
