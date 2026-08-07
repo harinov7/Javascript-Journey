@@ -1,0 +1,40 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: monospace;
+}
+
+#container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: antiquewhite;
+    padding: 2rem;
+    border-radius: 10px;
+    border: dashed 2px rgb(67, 67, 67);
+}
+
+#displayClock {
+    font-size: 3rem;
+    margin: 0;
+}
+
+#compBtn button {
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: azure;
+    border-radius: 20px;
+    padding: 10px;
+    border: solid 1px green;
+}
+
+#compBtn button:hover{
+    cursor: pointer;
+}
+
+#compBtn button:active {
+    background-color: hsl(180, 100%, 90%);
+}

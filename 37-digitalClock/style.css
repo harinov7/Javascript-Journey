@@ -1,0 +1,16 @@
+body {
+    background-image: url(Yakutsk.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#showClock {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-size: 5rem;
+    font-family: monospace;
+    color: aliceblue;
+    text-shadow: 4px 4px 5px black;
+}
