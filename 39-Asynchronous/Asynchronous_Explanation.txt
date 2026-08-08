@@ -1,0 +1,7 @@
+// Asynchronous = cara kerja program untuk menjalankan tugas 
+//                di latar belakang tanpa harus menunggu tugas 
+//                tersebut selesai. Kode lain bisa terus berjalan, 
+//                sehingga aplikasi atau website tidak menjadi 
+//                macet (freezing) saat memproses data yang lama.
+
+// Biasanya pake callback, promise, async/await
