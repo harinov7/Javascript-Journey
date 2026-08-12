@@ -1,0 +1,25 @@
+#myButton {
+    border: none;
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+.enabled {
+    color: white;
+    background-color: hsl(180, 100%, 50%);
+}
+
+.disabled {
+    font-size: 4rem;
+    color: black;
+    background-color: hsl(233, 78%, 50%);
+}
+
+.hover {
+    font-size: 4.5rem;
+    background-color: hsl(233, 78%, 30%);
+}
+
+.upSize {
+    color: white;
+}
