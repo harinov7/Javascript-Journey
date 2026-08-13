@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="loadingPage">Data sedang dimuat...</div>
+
+    <div id="inventoryManagementSystem">
+
+        <div id="searchPage">
+            <h1 id="titleInventory">INVENTORY MANAGEMENT SYSTEM</h1>
+
+            <div id="informasiAwal">
+                <div id="totalProduk">
+                    <h4>Total Products</h4>
+                    <p>24</p>
+                </div>
+                <div id="totalStock">
+                    <h4>Total Stock</h4>
+                    <p>583</p>
+                </div>
+                <div id="lowStock">
+                    <h4>Low Stock</h4>
+                    <p>4</p>
+                </div>
+            </div>
+
+            <div id="searchBar">
+                <input type="search" id="searchInput" class="search" placeholder="Search" spellcheck="false">
+                <button id="submitBtn" class="search">Submit</button>
+                <div id="detailProductSearch" style="display: none;"></div>
+            </div>
+
+            <div id="productBar">
+                <h2>PRODUCTS</h2>
+                <div id="detailInformasi">
+                    <div id="productKolom">
+                        <h4>Product</h4>
+                        <pre></pre>
+                    </div>
+                    <div id="categoryKolom">
+                        <h4>Category</h4>
+                        <pre></pre>
+                    </div>
+                    <div id="priceKolom">
+                        <h4>Price</h4>
+                        <pre></pre>
+                    </div>
+                    <div id="stockKolom">
+                        <h4>Stock</h4>
+                        <pre></pre>
+                    </div>
+                    <div id="actionKolom">
+                        <h4>Action</h4>
+                        <div id="compBtn"></div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <div id="modalDisplay">
+            <div id="modalContent">
+                <h2 id="modalTitle"></h2>
+                <p id="modalCategory"></p>
+                <p id="modalBrand"></p>
+                <p id="modalPrice"></p>
+                <p id="modalStock"></p>
+                <p id="modalDescription"></p>
+                <img id="productImg" width="256" height="">
+
+                <button id="modalCloseBtn">Close</button>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>

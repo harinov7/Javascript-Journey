@@ -1,0 +1,216 @@
+:root {
+    --font-text: arial;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-text);
+    background-color: hsl(0, 0%, 6%);
+}
+
+#loadingPage {
+    display: none;
+    font-size: 3rem;
+    color: hsl(0, 0%, 85%);
+    height: 100vh;
+}
+
+#searchPage {
+    padding: 2rem;
+}
+
+#titleInventory {
+    margin: 0;
+    color: hsl(0, 0%, 80%);
+    background-color: hsl(0, 0%, 15%);
+    padding: 1rem;
+    text-align: center;
+    border-radius: 10px;
+}
+
+#informasiAwal {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    color: hsl(0, 0%, 80%);
+    margin: 2rem 0;
+    background-color: hsl(0, 0%, 0%);
+    border-radius: 10px;
+}
+
+#totalProduk,
+#totalStock,
+#lowStock {
+    text-align: center;
+    padding: 1rem;
+}
+
+#searchBar {
+    display: flex;
+    justify-content: center;
+}
+
+.search {
+    margin-top: 2rem;
+    font-size: 1.5rem;
+    border: none;
+}
+
+#searchInput {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    padding: 1.5rem;
+    background-color: hsl(0, 0%, 4%);
+    color: hsl(0, 0%, 75%);
+    width: 50%;
+    max-height: 2rem;
+}
+
+#submitBtn {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 0.5rem;
+    background-color: hsl(0, 0%, 20%);
+    color: hsl(0, 0%, 75%);
+    max-height: 3rem;
+    font-family: var(--font-text)
+}
+
+#searchInput:focus {
+    outline: 1px solid hsl(240, 100%, 25%);
+}
+
+#submitBtn:hover {
+    cursor: pointer;
+    background-color: hsl(0, 0%, 25%);
+}
+
+input::placeholder {
+    font-family: var(--font-text)
+}
+
+#productBar {
+    background-color: hsl(0, 0%, 9%);
+    margin: 2rem 0;
+    padding: 2rem;
+    border-radius: 10px;
+}
+
+#productBar h2 {
+    color: hsl(0, 0%, 80%);
+    text-align: center;
+}
+
+#detailInformasi {
+    display: flex;
+    justify-content: center;
+    gap: 10%;
+    color: hsl(0, 0%, 80%);
+}
+
+#productKolom h4,
+#categoryKolom h4,
+#priceKolom h4,
+#stockKolom h4,
+#actionKolom h4 {
+    background-color: hsl(0, 0%, 25%);
+}
+
+#productKolom pre,
+#categoryKolom pre,
+#priceKolom pre,
+#stockKolom pre,
+#actionKolom pre {
+    line-height: 1.5rem;
+    font-size: 1rem;
+}
+
+#compBtn {
+    display: flex;
+    flex-direction: column;
+    gap: 0.19rem;
+}
+
+#compBtn button {
+    border: none;
+    border-radius: 10px;
+    background-color: hsl(0, 0%, 25%);
+    font-size: 1.04rem;
+    color: hsl(0, 0%, 75%);
+    width: 150%;
+}
+
+#compBtn button:hover {
+    background-color: hsl(0, 0%, 20%);
+}
+
+#compBtn button:active {
+    background-color: hsl(0, 0%, 15%);
+}
+
+#modalDisplay {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+}
+
+#modalContent {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    background-color: hsl(0, 0%, 20%);
+    margin: 0rem 20rem;
+    padding: 3rem 5rem;
+    border-radius: 10px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+#modalCloseBtn {
+    padding: 0.3rem;
+    align-self: flex-end;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 10px;
+    color: hsl(0, 0%, 80%);
+    background-color: hsl(0, 0%, 35%);
+}
+
+#modalCloseBtn:hover {
+    background-color: hsl(0, 0%, 30%);
+}
+
+#modalCloseBtn:active {
+    background-color: hsl(0, 0%, 25%);
+}
+
+#productImg {
+    align-self: center;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: hsl(0, 0%, 25%);
+}
+
+::-webkit-scrollbar-thumb {
+    background: hsl(240, 95%, 16%);
+    border-radius: 5px;
+    border: 3px solid transparent;
+    background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background:hsl(240, 95%, 27%);
+    border: 3px solid transparent;
+    background-clip: padding-box;
+}
