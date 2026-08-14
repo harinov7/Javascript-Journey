@@ -1,21 +1,3 @@
-const productKolom = document.querySelector("#productKolom pre");
-const categoryKolom = document.querySelector("#categoryKolom pre");
-const priceKolom = document.querySelector("#priceKolom pre");
-const stockKolom = document.querySelector("#stockKolom pre");
-const searchInput = document.getElementById("searchInput");
-const submitBtn = document.getElementById("submitBtn");
-const actionKolom = document.getElementById("actionKolom");
-const compBtn = document.getElementById("compBtn");
-const modalDisplay = document.getElementById("modalDisplay");
-const modalTitle = document.getElementById("modalTitle");
-const modalCategory = document.getElementById("modalCategory");
-const modalBrand = document.getElementById("modalBrand");
-const modalPrice = document.getElementById("modalPrice");
-const modalStock = document.getElementById("modalStock");
-const modalDescription = document.getElementById("modalDescription");
-const modalCloseBtn = document.getElementById("modalCloseBtn");
-const productImg = document.getElementById("productImg");
-
 async function getData() {
     const loadingPage = document.getElementById("loadingPage")
     const inventoryManagementSystem = document.getElementById("inventoryManagementSystem");
@@ -61,11 +43,7 @@ function formatProductData(productsArray) {
     return { daftarProduct, category, price, stock, actions };
 }
 
-function renderInitialData(products) {
-    const totalProductDisplay = document.querySelector("#totalProduk p");
-    const totalStockDisplay = document.querySelector("#totalStock p");
-    const lowStockDisplay = document.querySelector("#lowStock p");
-
+function inventoryCalculate(products) {
     const totalProduct = products.length
     const totalStock = products.reduce((acc, curr) => {
         return acc + curr.stock
@@ -74,13 +52,22 @@ function renderInitialData(products) {
         return element.stock <= 5
     })
 
+    return [totalProduct, totalStock, lowStock]
+}
+
+function renderInitialData(products) {
+    const totalProductDisplay = document.querySelector("#totalProduk p");
+    const totalStockDisplay = document.querySelector("#totalStock p");
+    const lowStockDisplay = document.querySelector("#lowStock p");
+
+    const [totalProduct, totalStock, lowStock] = inventoryCalculate(products)
     totalProductDisplay.textContent = totalProduct
     totalStockDisplay.textContent = totalStock
     lowStockDisplay.textContent = lowStock.length
 
     const { daftarProduct, category, price, stock, actions } = formatProductData(products)
 
-    changeProductList(
+    renderProductList(
         daftarProduct,
         category,
         price,
@@ -89,7 +76,31 @@ function renderInitialData(products) {
     )
 }
 
+function modalOpen(product) {
+    const modalTitle = document.getElementById("modalTitle");
+    const modalCategory = document.getElementById("modalCategory");
+    const modalBrand = document.getElementById("modalBrand");
+    const modalPrice = document.getElementById("modalPrice");
+    const modalStock = document.getElementById("modalStock");
+    const modalDescription = document.getElementById("modalDescription");
+    const productImg = document.getElementById("productImg");
+
+    modalTitle.textContent = product.title
+    modalCategory.textContent = `Category: ${product.category}`
+    modalBrand.textContent = `Brand: ${product.brand !== undefined ? product.brand : "Tidak memiliki brand"}`
+    modalPrice.textContent = `Price: ${product.price.toLocaleString("us-US", {
+        style: "currency",
+        currency: "USD"
+    })}`
+    modalStock.textContent = `Stock Available: ${product.stock}`
+    modalDescription.textContent = `Description: ${product.description}`
+    productImg.src = product.thumbnail
+}
+
 function modalClose() {
+    const modalDisplay = document.getElementById("modalDisplay");
+    const modalCloseBtn = document.getElementById("modalCloseBtn");
+
     modalCloseBtn.addEventListener("click", () => {
         modalDisplay.style.display = "none";
     })
@@ -100,42 +111,90 @@ function modalClose() {
     })
 }
 
-function modal(productsArray) {
-        compBtn.addEventListener("click", (event) => {
-            if (!event.target.matches("button")) return;
-            const productId = Number(event.target.dataset.productId);
+function clickDetailButton(productsArray) {
+    const modalDisplay = document.getElementById("modalDisplay");
+    const compBtn = document.getElementById("compBtn");
+    compBtn.addEventListener("click", (event) => {
+        if (!event.target.matches("button")) return;
+        const productId = Number(event.target.dataset.productId);
 
-            modalDisplay.style.display = "block";
-            const product = productsArray.find(value => value.id === productId);
+        modalDisplay.style.display = "block";
+        const product = productsArray.find(value => value.id === productId);
 
-            modalTitle.textContent = product.title
-            modalCategory.textContent = product.category
-            modalBrand.textContent = `${product.brand !== undefined ? product.brand : "Tidak memiliki brand"}`
-            modalPrice.textContent = product.price.toLocaleString("us-US", {
-                style: "currency",
-                currency: "USD"
-            })
-            modalStock.textContent = product.stock
-            modalDescription.textContent = product.description
-            productImg.src = product.thumbnail
-        })
-    modalClose()
+        modalOpen(product)
+    })
+}
+
+function clickFilterSortButton() {
+    const filterSettingsContent = document.getElementById("filterSettingsContent");
+    const filterSettings = document.getElementById("filterSettings");
+    const sortSettingsContent = document.getElementById("sortSettingsContent");
+    const sortSettings = document.getElementById("sortSettings");
+    const containerFilterSortBtn = document.getElementById("containerFilterSortBtn");
+
+    containerFilterSortBtn.addEventListener("click", (event) => {
+        const filterBtn = event.target.closest("#filterBtn");
+        const sortBtn = event.target.closest("#sortBtn");
+
+        if (filterBtn) {
+            filterSettings.style.display = "block";
+            makingSureBtn(filterSettingsContent);
+        }
+        else if (sortBtn) {
+            sortSettings.style.display = "block";
+            makingSureBtn(sortSettingsContent);
+        }
+    });
+}
+
+function makingSureBtn(parent) {
+    const confirmButton = document.getElementById("confirmButton");
+
+    if (!parent.contains(confirmButton)) {
+        confirmButton.style.display = "flex";
+        parent.appendChild(confirmButton);
+    }
+}
+
+function confirmCancelClick() {
+    const confirmButton = document.getElementById("confirmButton");
+    const filterSettings = document.getElementById("filterSettings");
+    const sortSettings = document.getElementById("sortSettings");
+
+    confirmButton.addEventListener("click", (event) => {
+        const cancel = event.target.closest("#cancel");
+        const confirm = event.target.closest("#confirm");
+
+        if (cancel) {
+            filterSettings.style.display = "none";
+            sortSettings.style.display = "none";
+        }
+        else if (confirm) {
+            return;
+        }
+    });
 }
 
 function productFiltering(products) {
+    const searchInput = document.getElementById("searchInput");
+
     const keyword = searchInput.value.toLowerCase().trim();
 
     return products.filter(value =>
-            value.title.toLowerCase().includes(keyword)
-        )
+        value.title.toLowerCase().includes(keyword)
+    )
 }
-function searchProduct(products) {
-    submitBtn.addEventListener("click", () => {
-        const filteredProducts = productFiltering(products);
 
-        const data = formatProductData(filteredProducts)
-            
-        changeProductList(
+function filteredData(products) {
+    const filteredProducts = productFiltering(products);
+    return formatProductData(filteredProducts)
+}
+
+function searchProduct(products) {
+    const submitBtn = document.getElementById("submitBtn");
+    submitBtn.addEventListener("click", () => {
+        const data = filteredData(products)
+        renderProductList(
             data.daftarProduct,
             data.category,
             data.price,
@@ -145,7 +204,13 @@ function searchProduct(products) {
     })
 }
 
-function changeProductList(products, category, price, stock, action) {
+function renderProductList(products, category, price, stock, action) {
+    const compBtn = document.getElementById("compBtn");
+    const productKolom = document.querySelector("#productKolom pre");
+    const categoryKolom = document.querySelector("#categoryKolom pre");
+    const priceKolom = document.querySelector("#priceKolom pre");
+    const stockKolom = document.querySelector("#stockKolom pre");
+
     productKolom.textContent = products;
     categoryKolom.textContent = category;
     priceKolom.textContent = price;
@@ -156,10 +221,11 @@ function changeProductList(products, category, price, stock, action) {
 async function main() {
     const products = await getData();
     renderInitialData(products.products);
-    modal(products.products);
+    clickDetailButton(products.products)
+    modalClose()
     searchProduct(products.products);
+    clickFilterSortButton()
+    confirmCancelClick()
 }
 
 main()
-
-// Belum membuat modal

@@ -101,6 +101,23 @@ input::placeholder {
     text-align: center;
 }
 
+#containerFilterSortBtn {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+#filterBtn,
+#sortBtn {
+    border: none;
+    border-radius: 10px;
+    background-color: hsl(0, 0%, 25%);
+    font-size: 1.04rem;
+    color: hsl(0, 0%, 75%);
+    padding: 0.3rem 2rem;
+}
+
 #detailInformasi {
     display: flex;
     justify-content: center;
@@ -140,15 +157,29 @@ input::placeholder {
     width: 150%;
 }
 
-#compBtn button:hover {
+.allFilterBtn {
+    max-width: 20%;
+    border: none;
+    border-radius: 10px;
+    background-color: hsl(0, 0%, 35%);
+    font-size: 1.04rem;
+    color: hsl(0, 0%, 75%);
+    width: 150%;
+}
+
+#compBtn button:hover,
+#filterBtn:hover,
+#sortBtn:hover {
     background-color: hsl(0, 0%, 20%);
 }
 
-#compBtn button:active {
+#compBtn button:active,
+#filterBtn:active,
+#sortBtn:active {
     background-color: hsl(0, 0%, 15%);
 }
 
-#modalDisplay {
+#sortSettings {
     display: none;
     position: fixed;
     z-index: 1;
@@ -160,19 +191,35 @@ input::placeholder {
     backdrop-filter: blur(4px);
 }
 
-#modalContent {
+#modalDisplay,
+#filterSettings {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+}
+
+#modalContent,
+#filterSettingsContent,
+#sortSettingsContent {
     display: flex;
     flex-direction: column;
     color: white;
     background-color: hsl(0, 0%, 20%);
-    margin: 0rem 20rem;
+    margin: 2rem 20rem;
     padding: 3rem 5rem;
     border-radius: 10px;
     max-height: 80vh;
     overflow-y: auto;
 }
 
-#modalCloseBtn {
+#modalCloseBtn,
+#confirmButton button {
     padding: 0.3rem;
     align-self: flex-end;
     font-size: 1.2rem;
@@ -182,12 +229,23 @@ input::placeholder {
     background-color: hsl(0, 0%, 35%);
 }
 
-#modalCloseBtn:hover {
+#modalCloseBtn:hover,
+#confirmButton button:hover,
+.allFilterBtn:hover {
     background-color: hsl(0, 0%, 30%);
 }
 
-#modalCloseBtn:active {
+#modalCloseBtn:active,
+#confirmButton button:active,
+.allFilterBtn:active {
     background-color: hsl(0, 0%, 25%);
+}
+
+#confirmButton {
+    display: none;
+    align-self: flex-end;
+    padding: 2rem 0;
+    gap: 1rem;
 }
 
 #productImg {
@@ -210,7 +268,7 @@ input::placeholder {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background:hsl(240, 95%, 27%);
+    background: hsl(240, 95%, 27%);
     border: 3px solid transparent;
     background-clip: padding-box;
 }

@@ -39,6 +39,31 @@
 
             <div id="productBar">
                 <h2>PRODUCTS</h2>
+                <div id="containerFilterSortBtn">
+                    <button id="filterBtn">Filter</button>
+                    <button id="sortBtn">Sort</button>
+                </div>
+                <div id="filterSettings">
+                    <div id="filterSettingsContent">
+                        <h3>Category:</h3>
+                        <button class="allFilterBtn">All</button>
+
+                        <h3>Stock:</h3>
+                        <button class="allFilterBtn">All</button>
+
+                        <h3>Price:</h3>
+                        <button class="allFilterBtn">All</button>
+                    </div>
+                </div>
+                <div id="sortSettings">
+                    <div id="sortSettingsContent">
+                        <h3>Price</h3>
+                        <input id="highToLowRadio" type="radio" name="price" value="highToLow">
+                        <label>High To Low</label>
+                        <input id="lowToHighRadio" type="radio" name="price" value="lowToHigh">
+                        <label>Low To High</label>
+                    </div>
+                </div>
                 <div id="detailInformasi">
                     <div id="productKolom">
                         <h4>Product</h4>
@@ -63,7 +88,6 @@
 
                 </div>
             </div>
-
         </div>
         <div id="modalDisplay">
             <div id="modalContent">
@@ -79,6 +103,11 @@
             </div>
 
         </div>
+
+        <diV id="confirmButton" style="display: none;">
+            <button id="cancel">Cancel</button>
+            <button id="confirm">Confirm</button>
+        </diV>
     </div>
 
     <script src="js/script.js"></script>
