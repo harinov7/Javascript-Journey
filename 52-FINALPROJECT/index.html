@@ -9,13 +9,16 @@
 </head>
 
 <body>
+
+    <!-- Loading Page -->
     <div id="loadingPage">Data sedang dimuat...</div>
 
+    <!-- Main App -->
     <div id="inventoryManagementSystem">
-
         <div id="searchPage">
             <h1 id="titleInventory">INVENTORY MANAGEMENT SYSTEM</h1>
 
+            <!-- First Info Display -->
             <div id="informasiAwal">
                 <div id="totalProduk">
                     <h4>Total Products</h4>
@@ -31,39 +34,84 @@
                 </div>
             </div>
 
+            <!-- Search Feature -->
             <div id="searchBar">
                 <input type="search" id="searchInput" class="search" placeholder="Search" spellcheck="false">
                 <button id="submitBtn" class="search">Submit</button>
                 <div id="detailProductSearch" style="display: none;"></div>
             </div>
 
+            <!-- Products Section -->
             <div id="productBar">
                 <h2>PRODUCTS</h2>
+                <!-- Filter and Sort Button -->
                 <div id="containerFilterSortBtn">
                     <button id="filterBtn">Filter</button>
+                    <button id="addProductBtn">Add Product</button>
                     <button id="sortBtn">Sort</button>
                 </div>
                 <div id="filterSettings">
                     <div id="filterSettingsContent">
                         <h3>Category:</h3>
-                        <button class="allFilterBtn">All</button>
+                        <button id="allFilterCategoryBtn">All</button>
+                        <div id="filterCategoryType">
+                            <button id="allCategoryBtn" value="allCategory">All</button>
+                        </div>
 
                         <h3>Stock:</h3>
-                        <button class="allFilterBtn">All</button>
+                        <button id="allFilterStockBtn">All</button>
+                        <div id="filterStockType">
+                            <button id="allStockBtn" value="allStock">All</button>
+                            <button id="outOfStockBtn" value="outOfStock">Out of stock</button>
+                            <button id="lowStockBtn" value="lowStock">Low Stock</button>
+                            <button id="highStockBtn" value="highStock">High Stock</button>
+                        </div>
 
                         <h3>Price:</h3>
-                        <button class="allFilterBtn">All</button>
+                        <button id="allFilterPriceBtn">All</button>
+                        <div id="filterPriceType">
+                            <button id="allPriceBtn" value="allPrice">All</button>
+                            <button id="under50Btn" value="under50">Under $50</button>
+                            <button id="range50100Btn" value="50-100">$50-$100</button>
+                            <button id="above100Btn" value="above100">Above $100</button>
+                        </div>
                     </div>
                 </div>
                 <div id="sortSettings">
                     <div id="sortSettingsContent">
-                        <h3>Price</h3>
-                        <input id="highToLowRadio" type="radio" name="price" value="highToLow">
-                        <label>High To Low</label>
-                        <input id="lowToHighRadio" type="radio" name="price" value="lowToHigh">
-                        <label>Low To High</label>
+                        <div id="sortCompBtn">
+                            <button id="standardsortBtn" value="standardSort">Standard</button>
+                            <h3>Price</h3>
+                            <button id="lowToHighPriceBtn" value="lowToHighPrice">Low To High</button>
+                            <button id="highToLowPriceBtn" value="highToLowPrice">High To Low </button>
+                            <h3>Name</h3>
+                            <button id="increaseAlphabetBtn" value="increaseAlphabet">A - Z</button>
+                            <button id="decreaseAlphabetBtn" value="decreaseAlphabet">Z - A</button>
+                        </div>
                     </div>
                 </div>
+                <div id="addProductSettings">
+                    <div id="addProductContent">
+                        <label>Title: </label>
+                        <input type="text" id="createTitleInput">
+                        <label>Category: </label>
+                        <input type="text" id="createCategoryInput">
+                        <label>Brand (Opsional): </label>
+                        <input type="text" id="createBrandInput">
+                        <label>Price: </label>
+                        <input type="number" id="createPriceInput">
+                        <label>Stock: </label>
+                        <input type="number" id="createStockInput">
+                        <label>Description: </label>
+                        <input type="text" id="createDescriptionInput">
+                        <label for="inputFile">Product Image:
+                            <input type="file" id="inputFile" accept="image/*">
+                        </label>
+                        <h3 id="warningAddProduct">Fill out the require input</h3>
+                    </div>
+                </div>
+
+                <!-- Products Display Tabel -->
                 <div id="detailInformasi">
                     <div id="productKolom">
                         <h4>Product</h4>
@@ -85,10 +133,11 @@
                         <h4>Action</h4>
                         <div id="compBtn"></div>
                     </div>
-
                 </div>
             </div>
         </div>
+
+        <!-- Modal Detail Product -->
         <div id="modalDisplay">
             <div id="modalContent">
                 <h2 id="modalTitle"></h2>
@@ -103,7 +152,11 @@
             </div>
 
         </div>
+        <div id="successMsg">
+            <h3>Add product success!</h3>
+        </div>
 
+        <!-- Confirm Button For Filter/Sort -->
         <diV id="confirmButton" style="display: none;">
             <button id="cancel">Cancel</button>
             <button id="confirm">Confirm</button>
