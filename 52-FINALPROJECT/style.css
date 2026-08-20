@@ -245,9 +245,20 @@ input::placeholder {
     border-radius: 10px;
     max-height: 80vh;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
-#modalCloseBtn,
+#modalCloseBtn {
+    padding: 0.3rem;
+    align-self: flex-end;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 10px;
+    color: hsl(0, 0%, 80%);
+    background-color: hsl(0, 0%, 35%);
+    margin: 0 0 1rem 0;
+}
+
 #confirmButton button {
     padding: 0.3rem;
     align-self: flex-end;
@@ -273,6 +284,46 @@ input::placeholder {
 #allFilterStockBtn:active,
 #allFilterPriceBtn:active {
     background-color: hsl(0, 0%, 25%);
+}
+
+#editDeleteComp {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem 0;
+}
+
+#editBtn {
+    padding: 0.3rem;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 10px;
+    color: #1A1A1A;
+    background-color: #FFDE00;
+}
+
+#editBtn:hover {
+    background-color: hsl(52, 100%, 45%);
+}
+
+#editBtn:active {
+    background-color: hsl(52, 100%, 40%);
+}
+
+#deleteBtn {
+    padding: 0.3rem;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 10px;
+    color: #1A1A1A;
+    background-color: #BF0000;
+}
+
+#deleteBtn:hover {
+    background-color: hsl(0, 100%, 32%);
+}
+
+#deleteBtn:active {
+    background-color: hsl(0, 100%, 27%);
 }
 
 #filterCategoryType {
@@ -404,4 +455,25 @@ input::placeholder {
     align-items: center;
     transition: opacity 0.5s ease;
     opacity: 0;
+}
+
+.editInput {
+    display: none;
+    border-radius: 10px;
+    border: none;
+    padding: 1rem;
+    background-color: hsl(0, 0%, 4%);
+    color: hsl(0, 0%, 100%);
+    font-size: 1.1rem;
+}
+
+.editInput:focus {
+    outline: 1px solid hsl(240, 100%, 25%);
+}
+
+textarea {
+    width: 95%;          
+    min-height: 100px;
+    padding: 10px;
+    font-family: inherit;
 }

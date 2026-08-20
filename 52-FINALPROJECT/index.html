@@ -140,15 +140,38 @@
         <!-- Modal Detail Product -->
         <div id="modalDisplay">
             <div id="modalContent">
-                <h2 id="modalTitle"></h2>
-                <p id="modalCategory"></p>
-                <p id="modalBrand"></p>
-                <p id="modalPrice"></p>
-                <p id="modalStock"></p>
-                <p id="modalDescription"></p>
-                <img id="productImg" width="256" height="">
-
                 <button id="modalCloseBtn">Close</button>
+                <h2 id="modalTitle"></h2>
+                <input id="editTitleInput" class="editInput">
+
+                <p id="modalCategory"></p>
+                <input id="editCategoryInput" class="editInput">
+
+                <p id="modalBrand"></p>
+                <input id="editBrandInput" class="editInput">
+
+                <p id="modalPrice"></p>
+                <input type="number" id="editPriceInput" class="editInput">
+                
+                <p id="modalStock"></p>
+                <input type="number" id="editStockInput" class="editInput">
+
+                <p id="modalDescription"></p>
+                <textarea id="editDescriptionInput" rows="4" class="editInput"></textarea>
+
+                <img id="productImg" width="256" height="">
+                <label for="editImgInput">Image URL: </label>
+                <input type="file" id="editImgInput" class="editInput">
+
+                <div id="editDeleteComp">
+                    <button id="editBtn">Edit</button>
+                    <button id="deleteBtn">Delete</button>
+                </div>
+
+                <div id="saveCancelBtn">
+                    <button id="saveBtn">Save</button>
+                    <button id="cancelBtn">Cancel</button>
+                </div>
             </div>
 
         </div>

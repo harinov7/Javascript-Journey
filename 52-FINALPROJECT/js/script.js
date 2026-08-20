@@ -1,6 +1,7 @@
 // Data dari API jangan pernah disentuh atau dimutasi untuk display
 // Untuk kebutuhan display HARUS memakai array tiruan, jangan data asli
 
+let activeProductId = null;
 let selectedCategory = "allCategory"
 let selectedStock = "allStock"
 let selectedPrice = "allPrice"
@@ -77,6 +78,7 @@ function clickDetailButton(productsArray) {
     compBtn.addEventListener("click", (event) => {
         if (!event.target.matches("button")) return;
         const productId = Number(event.target.dataset.productId);
+        activeProductId = productId
 
         modalDisplay.style.display = "block";
         const product = productsArray.find(value => value.id === productId);
@@ -169,6 +171,10 @@ function openCategoryOptions(display, kindOfFilter) {
 
 }
 function confirmCancelClick(products) {
+    const totalProductDisplay = document.querySelector("#totalProduk p");
+    const totalStockDisplay = document.querySelector("#totalStock p");
+    const lowStockDisplay = document.querySelector("#lowStock p");
+
     const filterCategoryType = document.getElementById("filterCategoryType");
     const confirmButton = document.getElementById("confirmButton");
     const filterSettings = document.getElementById("filterSettings");
@@ -261,6 +267,12 @@ function confirmCancelClick(products) {
                             successMsg.style.display = "none";
                         }, 500);
                     }, 3000);
+
+                    const [totalProduct, totalStock, lowStock] = inventoryCalculate(products)
+                    totalProductDisplay.textContent = totalProduct
+                    totalStockDisplay.textContent = totalStock
+                    lowStockDisplay.textContent = lowStock.length
+
                 }
 
             }
@@ -357,8 +369,7 @@ function categoryActive() {
     filterCategoryType.addEventListener("click", (event) => {
         selectedCategory = event.target.value
 
-        const categoryButtons =
-            filterCategoryType.querySelectorAll("button");
+        const categoryButtons = filterCategoryType.querySelectorAll("button");
 
         categoryButtons.forEach(button => {
             button.style.backgroundColor = "hsl(0, 20%, 35%)";
@@ -574,6 +585,7 @@ function searchProductRender(products) {
 
 
 // CRUD
+// Create Product
 function acceptData(sourceOfTruthData) {
     const createTitleInput = document.getElementById("createTitleInput");
     const createCategoryInput = document.getElementById("createCategoryInput");
@@ -594,6 +606,84 @@ function acceptData(sourceOfTruthData) {
         stock: Number(createStockInput.value),
         brand: createBrandInput.value === "" ? "Tidak memiliki brand" : createBrandInput.value,
         thumbnail: thumbnail
+    })
+}
+function editProduct(sourceOfTruthData) {
+    const editBtn = document.getElementById("editBtn");
+    const editInput = document.querySelectorAll(".editInput");
+    const editTitleInput = document.getElementById("editTitleInput");
+    const editCategoryInput = document.getElementById("editCategoryInput");
+    const editBrandInput = document.getElementById("editBrandInput");
+    const editPriceInput = document.getElementById("editPriceInput");
+    const editStockInput = document.getElementById("editStockInput");
+    const editDescriptionInput = document.getElementById("editDescriptionInput");
+    const editImgInput = document.getElementById("editImgInput");
+
+    const modalTitle = document.getElementById("modalTitle");
+    const modalCategory = document.getElementById("modalCategory");
+    const modalBrand = document.getElementById("modalBrand");
+    const modalPrice = document.getElementById("modalPrice");
+    const modalStock = document.getElementById("modalStock");
+    const modalDescription = document.getElementById("modalDescription");
+    const productImg = document.getElementById("productImg");
+
+
+    editBtn.addEventListener("click", () => {
+        const productIndex = sourceOfTruthData.findIndex(
+            product => product.id === activeProductId
+        )
+        editInput.forEach(e => {
+            e.style.display = "block";
+        })
+        editTitleInput.value = sourceOfTruthData[productIndex].title
+        editCategoryInput.value = sourceOfTruthData[productIndex].category
+        editBrandInput.value = sourceOfTruthData[productIndex].brand
+        editPriceInput.value = sourceOfTruthData[productIndex].price
+        editStockInput.value = sourceOfTruthData[productIndex].stock
+        editDescriptionInput.value = sourceOfTruthData[productIndex].description
+
+        modalTitle.style.display = "none";
+        modalCategory.textContent = `Category:`
+        modalBrand.textContent = `Brand:`
+        modalPrice.textContent = `Price:`
+        modalStock.textContent = `Stock Available:`
+        modalDescription.textContent = `Description:`
+    })
+}
+
+// Delete Product
+function deleteProduct(sourceOfTruthData) {
+    const totalProductDisplay = document.querySelector("#totalProduk p");
+    const totalStockDisplay = document.querySelector("#totalStock p");
+    const lowStockDisplay = document.querySelector("#lowStock p");
+
+    const deleteBtn = document.getElementById("deleteBtn");
+    const modalDisplay = document.getElementById("modalDisplay")
+
+    deleteBtn.addEventListener("click", (e) => {
+        const productIndex = sourceOfTruthData.findIndex(
+            product => product.id === activeProductId
+        )
+        activeProductId = null;
+
+        if (productIndex === -1) return;
+        sourceOfTruthData.splice(productIndex, 1)
+        const { title, category, price, stock, actions } = formatProductData(sourceOfTruthData);
+
+        renderProductList(
+            title,
+            category,
+            price,
+            stock,
+            actions
+        )
+
+        const [totalProduct, totalStock, lowStock] = inventoryCalculate(sourceOfTruthData)
+        totalProductDisplay.textContent = totalProduct
+        totalStockDisplay.textContent = totalStock
+        lowStockDisplay.textContent = lowStock.length
+
+        modalDisplay.style.display = "none";
     })
 }
 
@@ -677,6 +767,8 @@ async function main() {
     sortActive()
     filterSortFeatureClose()
     renderCategoryFilter(sourceOfTruthData)
+    deleteProduct(sourceOfTruthData)
+    editProduct(sourceOfTruthData)
 }
 
 main()
