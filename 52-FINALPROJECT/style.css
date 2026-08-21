@@ -274,7 +274,8 @@ input::placeholder {
 .allFilterBtn:hover,
 #allFilterCategoryBtn:hover,
 #allFilterStockBtn:hover,
-#allFilterPriceBtn:hover {
+#allFilterPriceBtn:hover,
+#saveCancelBtn button:hover {
     background-color: hsl(0, 0%, 30%);
 }
 
@@ -282,7 +283,8 @@ input::placeholder {
 #confirmButton button:active,
 #allFilterCategoryBtn:active,
 #allFilterStockBtn:active,
-#allFilterPriceBtn:active {
+#allFilterPriceBtn:active,
+#saveCancelBtn button:active {
     background-color: hsl(0, 0%, 25%);
 }
 
@@ -476,4 +478,25 @@ textarea {
     min-height: 100px;
     padding: 10px;
     font-family: inherit;
+}
+
+#saveCancelBtn {
+    display: none;
+    justify-content: space-between;
+}
+
+#saveCancelBtn button {
+    padding: 0.3rem;
+    align-self: flex-end;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 10px;
+    color: hsl(0, 0%, 80%);
+    background-color: hsl(0, 0%, 35%);
+    margin: 1rem 0 0 0
+}
+
+#imageURL {
+    display: none;
+    margin: 1rem 0 1rem 0;
 }

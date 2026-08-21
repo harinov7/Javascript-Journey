@@ -160,7 +160,7 @@
                 <textarea id="editDescriptionInput" rows="4" class="editInput"></textarea>
 
                 <img id="productImg" width="256" height="">
-                <label for="editImgInput">Image URL: </label>
+                <label for="editImgInput" id="imageURL">Image URL: </label>
                 <input type="file" id="editImgInput" class="editInput">
 
                 <div id="editDeleteComp">
@@ -169,8 +169,8 @@
                 </div>
 
                 <div id="saveCancelBtn">
-                    <button id="saveBtn">Save</button>
-                    <button id="cancelBtn">Cancel</button>
+                    <button id="saveBtn" value="save">Save</button>
+                    <button id="cancelBtn" value="cancel">Cancel</button>
                 </div>
             </div>
 
@@ -186,7 +186,7 @@
         </diV>
     </div>
 
-    <script src="js/script.js"></script>
+    <script type="module" src="script.js"></script>
 </body>
 
 </html>
