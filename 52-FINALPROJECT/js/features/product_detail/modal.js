@@ -60,6 +60,7 @@ export function modalClose(productList) {
                 saveCancelBtn.style.display = "none";
                 productImg.style.display = "block";
                 imageURL.style.display = "none";
+                modalCloseBtn.style.display = "block";
                 const product = productList.find(value => value.id === appState.activeProductId);
                 modalOpen(product)
             }

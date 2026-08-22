@@ -1,4 +1,4 @@
-import { appState } from "../../state/app_state.js";
+import { appState } from "../../../state/app_state.js";
 
 export function priceActive() {
     const filterPriceType = document.getElementById("filterPriceType");
@@ -10,7 +10,7 @@ export function priceActive() {
             button.style.backgroundColor = "hsl(0, 20%, 35%)";
         })
         if (!event.target.matches("button")) return;
-        event.target.style.backgroundColor = "hsl(0, 20%, 25%)";x
+        event.target.style.backgroundColor = "hsl(0, 20%, 25%)";
     })
 }
 export function priceRules(product) {

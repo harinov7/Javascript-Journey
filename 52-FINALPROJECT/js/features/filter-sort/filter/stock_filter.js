@@ -1,4 +1,4 @@
-import { appState } from "../../state/app_state.js";
+import { appState } from "../../../state/app_state.js";
 
 export function stockActive() {
     const filterStockType = document.getElementById("filterStockType");

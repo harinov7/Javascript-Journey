@@ -1,4 +1,5 @@
 import { appState } from "../../state/app_state.js";
+import { saveLocalData } from "../../storage/product_storage.js";
 import { formatProductData } from "../../utils/format_data.js";
 import { inventoryCalculate } from "../../utils/inventory_calculate.js";
 import { renderProductList } from "../../utils/render_product.js";
@@ -35,5 +36,7 @@ export function deleteProduct(productList) {
         lowStockDisplay.textContent = lowStock.length
 
         modalDisplay.style.display = "none";
+
+        saveLocalData(productList)
     })
 }

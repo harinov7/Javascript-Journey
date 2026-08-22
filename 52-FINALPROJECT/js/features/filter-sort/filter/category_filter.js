@@ -1,14 +1,14 @@
-import { appState } from "../../state/app_state.js";
+import { appState } from "../../../state/app_state.js";
 
 export function categoryActive() {
     const filterCategoryType = document.getElementById("filterCategoryType");
     filterCategoryType.addEventListener("click", (event) => {
+        if (!event.target.matches("button")) return;
         appState.selectedCategory = event.target.value
         const categoryButtons = filterCategoryType.querySelectorAll("button");
         categoryButtons.forEach(button => {
             button.style.backgroundColor = "hsl(0, 20%, 35%)";
         });
-        if (!event.target.matches("button")) return;
         event.target.style.backgroundColor = "hsl(0, 20%, 25%)";
     })
 }
@@ -22,6 +22,7 @@ export function categoryRules(product) {
 export function renderCategoryFilter(sourceOfTruthData) {
     const filterCategoryType = document.getElementById("filterCategoryType")
 
+    filterCategoryType.replaceChildren();
     const categories = [... new Set(
         sourceOfTruthData.map(product => product.category)
     )]

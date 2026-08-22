@@ -3,6 +3,9 @@ import { formatProductData } from "../../utils/format_data.js";
 import { renderProductList } from "../../utils/render_product.js";
 import { inventoryCalculate } from "../../utils/inventory_calculate.js";
 import { modalOpen } from "../product_detail/modal.js";
+import { saveLocalData } from "../../storage/product_storage.js";
+import { renderCategoryFilter } from "../filter-sort/filter/category_filter.js";
+import { fileToBase64 } from "../../utils/file_to_base64.js";
 
 export function editProduct(productList) {
     const editDeleteComp = document.getElementById("editDeleteComp");
@@ -81,7 +84,7 @@ export function saveCancelEdit(productList) {
     const editDescriptionInput = document.getElementById("editDescriptionInput");
     const editImgInput = document.getElementById("editImgInput");
 
-    saveCancelBtn.addEventListener("click", (event) => {
+    saveCancelBtn.addEventListener("click", async (event) => {
         const productIndex = productList.findIndex(
             product => product.id === appState.activeProductId
         )
@@ -101,17 +104,21 @@ export function saveCancelEdit(productList) {
         });
 
         if (saveBtn) {
-            productList[productIndex].title = editTitleInput.value
-            productList[productIndex].category = editCategoryInput.value
-            productList[productIndex].brand = editBrandInput.value
-            productList[productIndex].price = Number(editPriceInput.value)
-            productList[productIndex].stock = Number(editStockInput.value)
-            productList[productIndex].description = editDescriptionInput.value
+            productList[productIndex].title = editTitleInput.value;
+            productList[productIndex].category = editCategoryInput.value;
+            productList[productIndex].brand = editBrandInput.value;
+            productList[productIndex].price = Number(editPriceInput.value);
+            productList[productIndex].stock = Number(editStockInput.value);
+            productList[productIndex].description = editDescriptionInput.value;
 
+            const file = editImgInput.files[0];
+
+            if (file) {
+                const base64 = await fileToBase64(file)
+                productList[productIndex].thumbnail = base64
+            }
             modalDisplay.style.display = "none";
-
             const { title, category, price, stock, actions } = formatProductData(productList);
-
             renderProductList(
                 title,
                 category,
@@ -126,13 +133,7 @@ export function saveCancelEdit(productList) {
             lowStockDisplay.textContent = lowStock.length
 
             appState.activeProductId = null;
-
-            const file = editImgInput.files[0];
-
-            if (file) {
-                productList[productIndex].thumbnail =
-                    URL.createObjectURL(file);
-            }
+            saveLocalData(productList)
         }
         else if (cancelBtn) {
             modalTitle.style.display = "block";
