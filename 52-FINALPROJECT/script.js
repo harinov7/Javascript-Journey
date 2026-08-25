@@ -30,13 +30,13 @@ import { confirmCancelClick } from './js/features/menu/confirm_cancel.js';
 import { searchProductRender } from './js/features/search/search.js';
 
 // Local Storage
-import { getLocalData, saveLocalData } from './js/storage/product_storage.js';
+import { getLocalData } from './js/storage/product_storage.js';
 
 // ORKESTRATOR
 async function main() {
     // Data dari API jangan pernah disentuh atau dimutasi untuk display
     // Untuk kebutuhan display HARUS memakai array tiruan, jangan data asli
-    let products;
+    let products = null
     const localData = getLocalData()
     if (localData === null) {
         products = await getData();
@@ -45,6 +45,10 @@ async function main() {
     }
     else {
         products = localData
+    }
+
+    if (products === null) {
+        console.log("hi")
     }
 
     const sourceOfTruthData = structuredClone(products)

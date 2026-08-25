@@ -47,6 +47,8 @@ export async function confirmCreate(productList) {
     const warningAddProduct = document.getElementById("warningAddProduct");
     const inputFile = document.getElementById("inputFile");
     const successMsg = document.getElementById("successMsg");
+    
+    const emptyData = document.getElementById("emptyData");
 
     if (createTitleInput.value === "" ||
         createCategoryInput.value === "" ||
@@ -56,7 +58,13 @@ export async function confirmCreate(productList) {
         inputFile.value === ""
     ) {
         warningAddProduct.style.visibility = "visible";
-    } else {
+        warningAddProduct.textContent =`Fill the require input and must be fit to the input`;
+    }
+    else if (createTitleInput.value.length > 30) {
+        warningAddProduct.style.visibility = "visible";
+        warningAddProduct.textContent = `Title max input is 30`;
+    }
+    else {
         await acceptData(productList)
         warningAddProduct.style.visibility = "hidden";
         addProductSettings.style.display = "none";
@@ -80,6 +88,7 @@ export async function confirmCreate(productList) {
         filterCategoryType.innerHTML = `<button id="allCategoryBtn" value="allCategory">All</button>`
         renderCategoryFilter(productList)
 
+        successMsg.textContent = `Add product success!`
         successMsg.style.display = "flex";
         successMsg.style.opacity = "1";
         setTimeout(() => {
@@ -93,6 +102,7 @@ export async function confirmCreate(productList) {
         totalProductDisplay.textContent = totalProduct
         totalStockDisplay.textContent = totalStock
         lowStockDisplay.textContent = lowStock.length
+        emptyData.style.display = "none";
 
         saveLocalData(productList)
     }

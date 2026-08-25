@@ -457,6 +457,8 @@ input::placeholder {
     align-items: center;
     transition: opacity 0.5s ease;
     opacity: 0;
+    padding: 0.6rem 0;
+    font-family: inherit;
 }
 
 .editInput {
@@ -499,4 +501,10 @@ textarea {
 #imageURL {
     display: none;
     margin: 1rem 0 1rem 0;
+}
+
+#emptyData,
+#failedLoadProducts {
+    color: white;
+    display: none;
 }

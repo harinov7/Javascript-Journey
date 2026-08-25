@@ -18,6 +18,7 @@ export function confirmCancelClick(productList) {
     const createDescriptionInput = document.getElementById("createDescriptionInput");
     const createBrandInput = document.getElementById("createBrandInput");
     const warningAddProduct = document.getElementById("warningAddProduct");
+    const inputFile = document.getElementById("inputFile");
 
     confirmButton.addEventListener("click", async (event) => {
         const cancel = event.target.closest("#cancel");
@@ -26,7 +27,7 @@ export function confirmCancelClick(productList) {
         filterCategoryType.style.display = "none";
         filterStockType.style.display = "none";
         filterPriceType.style.display = "none";
-        
+
         if (cancel) {
             filterSettings.style.display = "none";
             sortSettings.style.display = "none";
@@ -39,8 +40,7 @@ export function confirmCancelClick(productList) {
             createStockInput.value = ""
             createDescriptionInput.value = ""
             createBrandInput.value = ""
-
-
+            inputFile.value = ""
 
         }
         else if (confirm) {

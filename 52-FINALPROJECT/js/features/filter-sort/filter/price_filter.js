@@ -4,8 +4,15 @@ export function priceActive() {
     const filterPriceType = document.getElementById("filterPriceType");
 
     filterPriceType.addEventListener("click", (event) => {
-        appState.selectedPrice = event.target.value
         const priceButtons = filterPriceType.querySelectorAll("button");
+        if (!event.target.matches("button")) {
+            appState.selectedPrice = "allPrice";
+            priceButtons.forEach(button => {
+                button.style.backgroundColor = "hsl(0, 20%, 35%)";
+            })
+            return;
+        };
+        appState.selectedPrice = event.target.value
         priceButtons.forEach(button => {
             button.style.backgroundColor = "hsl(0, 20%, 35%)";
         })

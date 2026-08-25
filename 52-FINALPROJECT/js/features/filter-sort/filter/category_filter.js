@@ -3,12 +3,18 @@ import { appState } from "../../../state/app_state.js";
 export function categoryActive() {
     const filterCategoryType = document.getElementById("filterCategoryType");
     filterCategoryType.addEventListener("click", (event) => {
-        if (!event.target.matches("button")) return;
-        appState.selectedCategory = event.target.value
         const categoryButtons = filterCategoryType.querySelectorAll("button");
+        if (!event.target.matches("button")) {
+            appState.selectedCategory = "allCategory";
+            categoryButtons.forEach(button => {
+                button.style.backgroundColor = "hsl(0, 20%, 35%)";
+            });
+            return;
+        };
         categoryButtons.forEach(button => {
             button.style.backgroundColor = "hsl(0, 20%, 35%)";
         });
+        appState.selectedCategory = event.target.value
         event.target.style.backgroundColor = "hsl(0, 20%, 25%)";
     })
 }
@@ -23,6 +29,7 @@ export function renderCategoryFilter(sourceOfTruthData) {
     const filterCategoryType = document.getElementById("filterCategoryType")
 
     filterCategoryType.replaceChildren();
+    filterCategoryType.innerHTML = `<button id="allCategoryBtn" value="allCategory">All</button>`
     const categories = [... new Set(
         sourceOfTruthData.map(product => product.category)
     )]

@@ -84,6 +84,8 @@ export function saveCancelEdit(productList) {
     const editDescriptionInput = document.getElementById("editDescriptionInput");
     const editImgInput = document.getElementById("editImgInput");
 
+    const successMsg = document.getElementById("successMsg");
+
     saveCancelBtn.addEventListener("click", async (event) => {
         const productIndex = productList.findIndex(
             product => product.id === appState.activeProductId
@@ -133,11 +135,24 @@ export function saveCancelEdit(productList) {
             lowStockDisplay.textContent = lowStock.length
 
             appState.activeProductId = null;
+            editImgInput.value = "";
+
+            successMsg.textContent = `Edit product success!`;
+            successMsg.style.display = "flex";
+            successMsg.style.opacity = "1";
+            setTimeout(() => {
+                successMsg.style.opacity = "0";
+                setTimeout(() => {
+                    successMsg.style.display = "none";
+                }, 500);
+            }, 3000);
+
             saveLocalData(productList)
         }
         else if (cancelBtn) {
             modalTitle.style.display = "block";
             const product = productList.find(value => value.id === appState.activeProductId);
+            editImgInput.value = "";
             modalOpen(product)
         }
     })

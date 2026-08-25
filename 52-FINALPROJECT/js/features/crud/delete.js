@@ -3,6 +3,7 @@ import { saveLocalData } from "../../storage/product_storage.js";
 import { formatProductData } from "../../utils/format_data.js";
 import { inventoryCalculate } from "../../utils/inventory_calculate.js";
 import { renderProductList } from "../../utils/render_product.js";
+import { renderCategoryFilter } from "../filter-sort/filter/category_filter.js";
 
 export function deleteProduct(productList) {
     const totalProductDisplay = document.querySelector("#totalProduk p");
@@ -10,7 +11,10 @@ export function deleteProduct(productList) {
     const lowStockDisplay = document.querySelector("#lowStock p");
 
     const deleteBtn = document.getElementById("deleteBtn");
-    const modalDisplay = document.getElementById("modalDisplay")
+    const modalDisplay = document.getElementById("modalDisplay");
+    const successMsg = document.getElementById("successMsg");
+
+    const emptyData = document.getElementById("emptyData");
 
     deleteBtn.addEventListener("click", (e) => {
         const productIndex = productList.findIndex(
@@ -20,6 +24,10 @@ export function deleteProduct(productList) {
 
         if (productIndex === -1) return;
         productList.splice(productIndex, 1)
+        renderCategoryFilter(productList)
+        if (productList.length === 0) {
+            emptyData.style.display = "block";
+        }
         const { title, category, price, stock, actions } = formatProductData(productList);
 
         renderProductList(
@@ -36,6 +44,16 @@ export function deleteProduct(productList) {
         lowStockDisplay.textContent = lowStock.length
 
         modalDisplay.style.display = "none";
+
+        successMsg.textContent = `Delete product success!`;
+        successMsg.style.display = "flex";
+        successMsg.style.opacity = "1";
+        setTimeout(() => {
+            successMsg.style.opacity = "0";
+            setTimeout(() => {
+                successMsg.style.display = "none";
+            }, 500);
+        }, 3000);
 
         saveLocalData(productList)
     })

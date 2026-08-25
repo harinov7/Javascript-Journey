@@ -45,6 +45,8 @@ export function modalClose(productList) {
     const saveCancelBtn = document.getElementById("saveCancelBtn");
     const productImg = document.getElementById("productImg");
     const imageURL = document.getElementById("imageURL");
+    const editImgInput = document.getElementById("editImgInput");
+    const modalTitle = document.getElementById("modalTitle");
 
     modalCloseBtn.addEventListener("click", () => {
         modalDisplay.style.display = "none";
@@ -56,11 +58,13 @@ export function modalClose(productList) {
                 editInput.forEach(e => {
                     e.style.display = "none";
                 });
+                modalTitle.style.display = "block";
                 editDeleteComp.style.display = "flex";
                 saveCancelBtn.style.display = "none";
                 productImg.style.display = "block";
                 imageURL.style.display = "none";
                 modalCloseBtn.style.display = "block";
+                editImgInput.value = "";
                 const product = productList.find(value => value.id === appState.activeProductId);
                 modalOpen(product)
             }

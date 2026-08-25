@@ -7,18 +7,29 @@ export function renderInitialData(productList) {
     const totalStockDisplay = document.querySelector("#totalStock p");
     const lowStockDisplay = document.querySelector("#lowStock p");
 
+    const emptyData = document.getElementById("emptyData");
+
+    const productBar = document.getElementById("productBar");
+
     const [totalProduct, totalStock, lowStock] = inventoryCalculate(productList)
     totalProductDisplay.textContent = totalProduct
     totalStockDisplay.textContent = totalStock
     lowStockDisplay.textContent = lowStock.length
 
-    const { title, category, price, stock, actions } = formatProductData(productList)
+    if (productList.length === 0) {
+        emptyData.style.display = "block";
+    }
+    else {
+        emptyData.style.display = "none";
+        const { title, category, price, stock, actions } = formatProductData(productList)
 
-    renderProductList(
-        title,
-        category,
-        price,
-        stock,
-        actions
-    )
+        renderProductList(
+            title,
+            category,
+            price,
+            stock,
+            actions
+        )
+    }
+
 }

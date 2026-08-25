@@ -3,8 +3,15 @@ import { appState } from "../../../state/app_state.js";
 export function stockActive() {
     const filterStockType = document.getElementById("filterStockType");
     filterStockType.addEventListener("click", (event) => {
-        appState.selectedStock = event.target.value
         const stockButtons = filterStockType.querySelectorAll("button")
+        if (!event.target.matches("button")) {
+            appState.selectedStock = "allStock";
+            stockButtons.forEach(button => {
+                button.style.backgroundColor = "hsl(0, 20%, 35%)";
+            });
+            return;
+        }
+        appState.selectedStock = event.target.value
         stockButtons.forEach(button => {
             button.style.backgroundColor = "hsl(0, 20%, 35%)";
         });
